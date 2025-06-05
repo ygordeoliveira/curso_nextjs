@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    background-color: #000;
+    padding: 20px 10px;
+}
+
+/* Melhorando os links da nossa navbar */
+.navbar a {
+    color: #FFF;
+    margin-right: 1em;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* Transição ao passar o mouse em cima dos links */
+.navbar a:hover {
+    color: #999;
+}
