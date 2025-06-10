@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Todo() {
-    // Hook usado para lidar com urls no Next
+    // Hook usado para lidar com os valores passados nos parâmetros urls no Next
     const router = useRouter();
 
-    // para pegar os paramêtros da minha url
+    // para pegar o valor passado nos paramêtros de busca da minha url
     const todoId = router.query.todoId;
 
     return (
