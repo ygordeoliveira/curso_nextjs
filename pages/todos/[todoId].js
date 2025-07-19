@@ -1,27 +1,51 @@
 import Link from "next/link";
 
-import { useRouter } from "next/router";
+export async function getStaticProps(context) {
+    const { params } = context;
 
-export default function Todo() {
-    // Hook usado para lidar com os valores passados nos parâmetros urls no Next
-    const router = useRouter();
+    const data = await fetch(
+        `https://jsonplaceholder.typicode.com/todos/${params.todoId}`
+    );
 
-    // para pegar o valor passado nos paramêtros de busca da minha url
-    const todoId = router.query.todoId;
+    const todo = await data.json();
 
+    return {
+        props: { todo },
+    }
+}
+
+export async function getStaticPaths() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos/");
+
+    const data = await response.json();
+
+    // paths
+    const paths = data.map((todo) => {
+        return {
+            params: {
+                todoId: `${todo.id}`,
+            }
+        }
+    })
+
+    return { paths, fallback: false }
+}
+
+export default function Todo({ todo }) {
     return (
         <>
-            <Link href="/">Voltar</Link>
-            <h1>Exibindo o todo: {todoId}</h1>
+            <Link href="/todos">Voltar</Link>
+            <h1>Exibindo o todo: {todo.id}</h1>
+            <h3>Texto: {todo.title}</h3>
             {/* Acessando um comentário de forma dinâmica */}
             <p>Comentário: la la la...
-                <Link href={`/todos/${todoId}/comments/1`}>Detalhes</Link> 
+                <Link href={`/todos/${todo.id}/comments/1`}>Detalhes</Link> 
             </p>
             <p>Comentário: le le le...
-                <Link href={`/todos/${todoId}/comments/2`}>Detalhes</Link> 
+                <Link href={`/todos/${todo.id}/comments/2`}>Detalhes</Link> 
             </p>
             <p>Comentário: li li li...
-                <Link href={`/todos/${todoId}/comments/3`}>Detalhes</Link> 
+                <Link href={`/todos/${todo.id}/comments/3`}>Detalhes</Link> 
             </p>
         </>
     )
