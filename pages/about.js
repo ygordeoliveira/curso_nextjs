@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Head from "next/head"
+import Head from "next/head";
 import styles from "../styles/About.module.css";
 
 export default function About() {
