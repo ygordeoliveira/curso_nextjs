@@ -5,7 +5,7 @@ import styles from "../styles/About.module.css";
 export default function About() {
     return (
         <>
-          {/* Passando metatags para a nossa página Home */}
+            {/* Passando metatags para a nossa página Home */}
             <Head>
                 <title>Página de About</title>
                 {/* Define palavras-chave relacionadas á página  */}
